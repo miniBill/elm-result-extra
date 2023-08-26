@@ -147,7 +147,6 @@ combine list =
     combineHelp list []
 
 
-
 combineHelp : List (Result x a) -> List a -> Result x (List a)
 combineHelp list acc =
     case list of
@@ -172,7 +171,22 @@ Also known as `traverse` on lists.
 -}
 combineMap : (a -> Result x b) -> List a -> Result x (List b)
 combineMap f ls =
-    combine (List.map f ls)
+    combineMapHelp f ls []
+
+
+combineMapHelp : (a -> Result x b) -> List a -> List b -> Result x (List b)
+combineMapHelp f list acc =
+    case list of
+        head :: tail ->
+            case f head of
+                Ok a ->
+                    combineMapHelp f tail (a :: acc)
+
+                Err x ->
+                    Err x
+
+        [] ->
+            Ok (List.reverse acc)
 
 
 {-| Pull a result out of the _first_ element of a tuple
