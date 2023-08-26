@@ -50,16 +50,16 @@ commonHelperTests =
     describe "Common Helpers"
         [ test "isOk - Ok" <|
             \_ ->
-                Expect.true "Expected Ok value to return True" (isOk <| Ok 2)
+                Expect.equal True (isOk <| Ok 2)
         , test "isOk - Err" <|
             \_ ->
-                Expect.false "Expected Err value to return False" (isOk <| Err 42)
+                Expect.equal False (isOk <| Err 42)
         , test "isErr - Ok" <|
             \_ ->
-                Expect.false "Expected Ok value to return False" (isErr <| Ok 2)
+                Expect.equal False (isErr <| Ok 2)
         , test "isErr - Err" <|
             \_ ->
-                Expect.true "Expected Err value to return True" (isErr <| Err 42)
+                Expect.equal True (isErr <| Err 42)
         , test "extract - Ok" <|
             \_ ->
                 Expect.equal (extract (always 42) <| Ok 2) 2
@@ -212,6 +212,9 @@ combineMapTests =
         , test "all Ok" <|
             \_ ->
                 Expect.equal (combineMap (always <| Ok 42) [ 1, 2, 3, 4 ]) <| Ok [ 42, 42, 42, 42 ]
+        , test "all Ok #2" <|
+            \_ ->
+                Expect.equal (combineMap (\n -> Ok <| n + 1) [ 1, 2, 3, 4 ]) <| Ok [ 2, 3, 4, 5 ]
         , test "all Err" <|
             \_ ->
                 Expect.equal (combineMap (always <| Err 42) [ 1, 2, 3, 4 ]) <| Err 42
