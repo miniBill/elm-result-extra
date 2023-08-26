@@ -1,7 +1,7 @@
 {
     "type": "package",
     "name": "miniBill/elm-result-extra",
-    "summary": "Convenience functions for working with Result",
+    "summary": "Convenience functions for working with Result. Faster fork of elm-community/result-extra",
     "license": "MIT",
     "version": "1.0.0",
     "exposed-modules": [

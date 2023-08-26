@@ -1,3 +1,5 @@
+This is a fork and drop-in replacement of [elm-community/result-extra](https://github.com/elm-community/result-extra). It has the same API but it's faster.
+
 # Convenience functions for working with Result
 
 This package contains convenience functions for working with the `Result` type.
